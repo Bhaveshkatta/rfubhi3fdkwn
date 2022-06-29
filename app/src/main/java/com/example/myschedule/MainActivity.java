@@ -22,6 +22,11 @@ import java.util.List;
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        if (FirebaseAuth.getInstance().getCurrentUser() != null){
+            Intent intent= new Intent(this, MainActivity2.class);
+            startActivity(intent);
+            finish();
+        }
     }
 
         public void log(View view) {
