@@ -40,6 +40,7 @@ import java.util.List;
                 .setAvailableProviders(provi)
                 .setTosAndPrivacyPolicyUrls("https://example.com", "https://example.com")
                 .setLogo(R.drawable.ic_launcher_foreground)
+                //UHKUJHKH
                 .build();
             startActivityForResult(intent,
                     skdvhks);
