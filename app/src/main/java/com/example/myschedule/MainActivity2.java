@@ -33,6 +33,9 @@ public class MainActivity2 extends AppCompatActivity {
             startActivity(intenbht);
             finish();
         }
+
+
+
         buttonf.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
