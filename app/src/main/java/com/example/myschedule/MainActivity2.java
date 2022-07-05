@@ -34,6 +34,7 @@ public class MainActivity2 extends AppCompatActivity {
             finish();
         }
 
+// bekar names rakhna band kar
 
         buttonf.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -43,6 +44,4 @@ public class MainActivity2 extends AppCompatActivity {
             }
         });
     }
-
-
 }
