@@ -5,6 +5,7 @@ import static com.google.firebase.auth.FirebaseAuth.*;
 import android.content.Intent;
 import android.os.Bundle;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -20,41 +21,26 @@ import com.example.myschedule.databinding.ActivityMain2Binding;
 import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity2 extends AppCompatActivity {
-
-    private AppBarConfiguration appBarConfiguration;
-    private ActivityMain2Binding binding;
-
+    FloatingActionButton buttonf;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        binding = ActivityMain2Binding.inflate(getLayoutInflater());
-        setContentView(binding.getRoot());
-
-        setSupportActionBar(binding.toolbar);
-
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        appBarConfiguration = new AppBarConfiguration.Builder(navController.getGraph()).build();
-        NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
-
-        binding.fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
+        setContentView(R.layout.activity_main2);
+        buttonf = (FloatingActionButton) findViewById(R.id.fab);
+        Intent intent = new Intent(this, MainActivity3.class);
         if(FirebaseAuth.getInstance().getCurrentUser() == null){
-            Intent intent =  new Intent(this, MainActivity.class);
-            startActivity(intent);
+            Intent intenbht =  new Intent(this, MainActivity.class);
+            startActivity(intenbht);
             finish();
         }
+        buttonf.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(intent);
+            }
+        });
     }
 
-    @Override
-    public boolean onSupportNavigateUp() {
-        NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_content_main);
-        return NavigationUI.navigateUp(navController, appBarConfiguration)
-                || super.onSupportNavigateUp();
-    }
+
 }
