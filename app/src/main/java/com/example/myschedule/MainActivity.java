@@ -39,9 +39,7 @@ import java.util.List;
                 .createSignInIntentBuilder()
                 .setAvailableProviders(provi)
                 .setTosAndPrivacyPolicyUrls("https://example.com", "https://example.com")
-                .setLogo(R.drawable.ic_launcher_foreground)
-                //UHKUJHKH
-                .build();
+                .setLogo(R.drawable.hello).build();
             startActivityForResult(intent,
                     skdvhks);
         }

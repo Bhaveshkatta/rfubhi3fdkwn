@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/background2"
     android:onClick="log"
     tools:context=".MainActivity">
 
@@ -13,6 +14,7 @@
         android:layout_height="53dp"
         android:elegantTextHeight="false"
         android:text="       User Sign in -->"
+        android:textColor="#3F51B5"
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,16 +36,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView"
         app:layout_constraintVertical_bias="0.119" />
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="409dp"
-        android:layout_height="390dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/button"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/hello" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

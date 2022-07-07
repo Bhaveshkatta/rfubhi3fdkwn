@@ -2,8 +2,8 @@
     <!-- Base application theme. -->
     <style name="Theme.MySchedule" parent="Theme.MaterialComponents.DayNight.DarkActionBar">
         <!-- Primary brand color. -->
-        <item name="colorPrimary">@color/purple_500</item>
-        <item name="colorPrimaryVariant">@color/purple_700</item>
+        <item name="colorPrimary">@color/OmKanha</item>
+        <item name="colorPrimaryVariant">@color/OmKanha</item>
         <item name="colorOnPrimary">@color/white</item>
         <!-- Secondary brand color. -->
         <item name="colorSecondary">@color/teal_200</item>
@@ -21,5 +21,8 @@
 
     <style name="Theme.MySchedule.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
 
+
+
     <style name="Theme.MySchedule.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
 </resources>
