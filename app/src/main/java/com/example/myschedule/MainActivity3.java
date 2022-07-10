@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
+import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
@@ -15,13 +16,13 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import java.text.BreakIterator;
-
 public class MainActivity3 extends AppCompatActivity {
+    Button Cal_button, Tim_button;
     EditText contacteditext;
     EditText NameEdittext;
     private static final int CONTACT_PERMISSION_CODE = 1;
@@ -33,6 +34,19 @@ public class MainActivity3 extends AppCompatActivity {
         setContentView(R.layout.activity_main3);
         contacteditext = findViewById(R.id.contactEDittext);
         NameEdittext = findViewById(R.id.NameEdtext);
+        Cal_button = findViewById(R.id.CalButton);
+        Tim_button = findViewById(R.id.TimButton);
+
+
+        Cal_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendar calendar = new calendar();
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.CalendarLL,calendar);
+                transaction.commit();
+            }
+        });
 
         NameEdittext.setOnClickListener(new View.OnClickListener() {
             @Override

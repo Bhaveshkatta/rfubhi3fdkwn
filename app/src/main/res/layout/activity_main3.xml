@@ -7,12 +7,23 @@
     android:background="@drawable/background2"
     tools:context=".MainActivity3">
 
+    <LinearLayout
+        android:id="@+id/CalendarLL"
+        android:layout_width="413dp"
+        android:layout_height="443dp"
+        android:layout_marginBottom="4dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactEDittext"
+        app:layout_constraintVertical_bias="1.0"/>
+
     <EditText
         android:id="@+id/NameEdtext"
         style="@style/Widget.AppCompat.Light.AutoCompleteTextView"
-        android:layout_width="219dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="56dp"
+        android:layout_width="216dp"
+        android:layout_height="43dp"
+        android:layout_marginTop="40dp"
         android:background="@color/white"
         android:drawableStart="@drawable/ic_baseline_perm_identity_24"
         android:ems="10"
@@ -20,15 +31,15 @@
         android:inputType="textPersonName"
         android:textColorHint="#1E1ECF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/contactEDittext"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/contactEDittext"
         android:layout_width="238dp"
         android:layout_height="43dp"
-        android:layout_marginTop="76dp"
+        android:layout_marginTop="40dp"
         android:background="@color/white"
         android:drawableStart="@drawable/ic_phone"
         android:ems="10"
@@ -36,8 +47,34 @@
         android:inputType="phone"
         android:textColorHint="#1E1ECF"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.502"
+        app:layout_constraintHorizontal_bias="0.445"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/NameEdtext" />
+
+    <Button
+        android:id="@+id/CalButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="68dp"
+        android:text="Calendar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.124"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/contactEDittext"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <Button
+        android:id="@+id/TimButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="36dp"
+        android:text="Time"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.617"
+        app:layout_constraintStart_toEndOf="@+id/CalButton"
+        app:layout_constraintTop_toBottomOf="@+id/contactEDittext"
+        app:layout_constraintVertical_bias="0.131" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
