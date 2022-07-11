@@ -9,22 +9,35 @@ import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.TimePickerDialog;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.ContactsContract;
+import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 public class MainActivity3 extends AppCompatActivity {
-    Button Cal_button, Tim_button;
+    Button Cal_button, next_button;
+    TextView textView;
     EditText contacteditext;
     EditText NameEdittext;
+    int t2Hour, t2Minute;
+
     private static final int CONTACT_PERMISSION_CODE = 1;
     private static final int CONTACT_PICK_CODE = 2;
 
@@ -35,7 +48,57 @@ public class MainActivity3 extends AppCompatActivity {
         contacteditext = findViewById(R.id.contactEDittext);
         NameEdittext = findViewById(R.id.NameEdtext);
         Cal_button = findViewById(R.id.CalButton);
-        Tim_button = findViewById(R.id.TimButton);
+        textView = findViewById(R.id.textView4);
+        next_button = findViewById(R.id.button2);
+        Intent inte = new Intent(this, MainActivity4.class);
+
+        next_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                startActivity(inte);
+                finish();
+            }
+        });
+
+
+        Intent intent = getIntent();
+        String s = intent.getStringExtra("key");
+
+        textView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                    TimePickerDialog timePickerDialog = new TimePickerDialog(
+                            MainActivity3.this,
+                            android.R.style.Theme_Holo_Light_Dialog_MinWidth,
+                            new TimePickerDialog.OnTimeSetListener() {
+                                @Override
+                                public void onTimeSet(TimePicker view, int hourOfDay, int minute) {
+                                    t2Hour = hourOfDay;
+                                    t2Minute = minute;
+                                    String time = t2Hour + ":" + t2Minute;
+                                    SimpleDateFormat f24Hours = new SimpleDateFormat(
+                                            "HH:mm"
+                                    );
+                                    try {
+                                        Date date = f24Hours.parse(time);
+                                        SimpleDateFormat f12Hours = new SimpleDateFormat(
+                                                "hh:mm aa"
+                                        );
+                                        textView.setText(f12Hours.format(date));
+                                    }catch (ParseException e) {
+                                        e.printStackTrace();
+                                    }
+                                }
+                            }, 12, 0, false
+                    );
+                    timePickerDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                    timePickerDialog.updateTime(t2Hour, t2Minute);
+                    timePickerDialog.show();
+
+                }
+
+        });
 
 
         Cal_button.setOnClickListener(new View.OnClickListener() {
