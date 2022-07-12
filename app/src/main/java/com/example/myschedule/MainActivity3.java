@@ -5,11 +5,13 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
-import androidx.fragment.app.FragmentTransaction;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.AlertDialog;
+import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.app.usage.UsageEvents;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
@@ -17,53 +19,65 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.net.Uri;
 import android.os.Bundle;
+import android.provider.CalendarContract;
 import android.provider.ContactsContract;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.TimePicker;
 import android.widget.Toast;
 
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Date;
 
 public class MainActivity3 extends AppCompatActivity {
-    Button Cal_button, next_button;
-    TextView textView;
-    EditText contacteditext;
-    EditText NameEdittext;
+    private DatePickerDialog datePickerDialog;
+    Button save_button;
+    TextView textView, TextViewCal;
+    EditText contacteditext, NameEdittext, Event1, Event2, Event3;
+    //EditText NameEdittext;
     int t2Hour, t2Minute;
 
     private static final int CONTACT_PERMISSION_CODE = 1;
     private static final int CONTACT_PICK_CODE = 2;
-
+    DatabaseReference databas;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main3);
+        initDatePicker();
         contacteditext = findViewById(R.id.contactEDittext);
         NameEdittext = findViewById(R.id.NameEdtext);
-        Cal_button = findViewById(R.id.CalButton);
+        TextViewCal = findViewById(R.id.textView5);
+        TextViewCal.setText(getTodaysDate());
         textView = findViewById(R.id.textView4);
-        next_button = findViewById(R.id.button2);
-        Intent inte = new Intent(this, MainActivity4.class);
+        Event1 = findViewById(R.id.event1);
+        Event2 = findViewById(R.id.event2);
+        Event3 = findViewById(R.id.event3);
+        save_button = findViewById(R.id.button2);
+        databas = FirebaseDatabase.getInstance().getReference().child("Add");
 
-        next_button.setOnClickListener(new View.OnClickListener() {
+        Intent intent = getIntent();
+        String s = intent.getStringExtra("key");
+        Intent inte = new Intent(this, MainActivity2.class);
+        save_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 startActivity(inte);
                 finish();
             }
+
+            
         });
-
-
-        Intent intent = getIntent();
-        String s = intent.getStringExtra("key");
+        
 
         textView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -101,15 +115,6 @@ public class MainActivity3 extends AppCompatActivity {
         });
 
 
-        Cal_button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendar calendar = new calendar();
-                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.CalendarLL,calendar);
-                transaction.commit();
-            }
-        });
 
         NameEdittext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -123,6 +128,73 @@ public class MainActivity3 extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private String getTodaysDate() {
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        month = month + 1;
+        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+        return makeDateString(dayOfMonth, month, year);
+    }
+
+    private void initDatePicker(){
+        DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
+            @Override
+            public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
+                month = month + 1;
+                String Date = makeDateString(dayOfMonth, month, year);
+                TextViewCal.setText(Date);
+            }
+        };
+
+        Calendar cal = Calendar.getInstance();
+        int year = cal.get(Calendar.YEAR);
+        int month = cal.get(Calendar.MONTH);
+        int dayOfMonth = cal.get(Calendar.DAY_OF_MONTH);
+
+        int style = AlertDialog.THEME_HOLO_LIGHT;
+
+        datePickerDialog = new DatePickerDialog(this, style, dateSetListener, year, month, dayOfMonth);
+    }
+
+    private String makeDateString(int dayOfMonth, int month, int year) {
+        return dayOfMonth + "/" + getMonthFormat(month) + "/" + year;
+    }
+
+    private String getMonthFormat(int month) {
+        if(month == 1)
+            return "Jan";
+        if(month == 2)
+            return "Feb";
+        if(month == 3)
+            return "March";
+        if(month == 4)
+            return "April";
+        if(month == 5)
+            return "May";
+        if(month == 6)
+            return "June";
+        if(month == 7)
+            return "July";
+        if(month == 8)
+            return "Aug";
+        if(month == 9)
+            return "Sept";
+        if(month == 10)
+            return "Oct";
+        if(month == 11)
+            return "Nov";
+        if(month == 12)
+            return "Dec";
+
+        //Default should never happen
+        return "Jan";
+    }
+
+    public void openDatePicker(View view){
+        datePickerDialog.show();
     }
 
     private boolean checkContactPermission() {
@@ -212,7 +284,10 @@ public class MainActivity3 extends AppCompatActivity {
         } else {
             //calls when user clicks back button I don't pick contact
         }
+
     }
+
+
 }
 
 

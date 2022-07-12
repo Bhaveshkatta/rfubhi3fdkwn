@@ -19,6 +19,10 @@ import androidx.navigation.ui.NavigationUI;
 
 import com.example.myschedule.databinding.ActivityMain2Binding;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import io.reactivex.rxjava3.internal.operators.single.SingleJust;
 
 public class MainActivity2 extends AppCompatActivity {
     FloatingActionButton buttonf;
@@ -34,6 +38,7 @@ public class MainActivity2 extends AppCompatActivity {
             finish();
         }
 
+
 // bekar names rakhna band kar
 
         buttonf.setOnClickListener(new View.OnClickListener() {
@@ -43,5 +48,7 @@ public class MainActivity2 extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+
     }
 }
